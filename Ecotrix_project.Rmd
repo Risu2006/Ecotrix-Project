@@ -1,0 +1,614 @@
+---
+title: "Ecotrix Project"
+author: "Aakansha Rawat"
+date: "2024-03-25"
+output: 
+  cleanrmd::html_document_clean:
+    theme: latex.css
+    mathjax: default
+    use_fontawesome: true
+    toc: true
+    toc_float: true
+    css: "custom.css"
+---
+
+# Basics
+
+<b>[Q1: Write down all code with the interpretation of the result. (Vector, Matrix, Summary of Vector and Matrix, make data frame (with 20 columns), Summary of data frame, Interpretation of Summary)]{style="font-family: Ariel;"}</b>
+
+**a) Vector**
+
+<b>*eg 1:*</b>
+
+```{r}
+vector1<-c(1:8)   ;   vector1
+summary(vector1)
+```
+
+Here we have created a vector named "vector1" which is from 1 to 8; And some results of this is as follows :
+
+Min of vector1 is **`r min(vector1)`**\
+Max of vector1 is **`r max(vector1)`**\
+Median (Q2 i.e 50th percentile) of vector1 is **`r median(vector1)`**\
+Mean of vector1 is **`r mean(vector1)`**\
+First quartile (Q1) i.e 25th percentile of vector1 is **`r quantile(vector1, 0.25)`**\
+Third quartile (Q3) i.e 75th percentile of vector1 is **`r quantile(vector1, 0.75)`**
+
+<b>*eg 2:*</b>
+
+```{r}
+vector2<-seq(1,20,2)
+vector2
+summary(vector2)
+```
+
+Here we have created a vector named "vector2" which is from 1 to 20 with gap of 2 each; And
+
+Min of vector2 is **`r min(vector2)`**\
+Max of vector2 is **`r max(vector2)`**\
+Median of vector2 is **`r median(vector2)`**\
+Mean of vector2 is **`r mean(vector2)`**\
+First quartile (Q1) i.e 25th percentile of vector2 is **`r quantile(vector2, 0.25)`**\
+Third quartile (Q3) i.e 75th percentile of vector2 is **`r quantile(vector2, 0.75)`**
+
+<b>*eg 3:*</b>
+
+```{r}
+vector3<-rep(c(1:5),2)
+vector3
+summary(vector3)
+```
+
+Here we have created a vector named "vector3" which is from 1 to 5 with repetition of each term twice; And
+
+Min of vector3 is **`r min(vector3)`**\
+Max of vector3 is **`r max(vector3)`**\
+Mean of vector3 is **`r mean(vector3)`**\
+Median of vector3 is **`r median(vector3)`**\
+First quartile (Q1) i.e 25th percentile of vector3 is **`r quantile(vector3, 0.25)`**\
+Third quartile (Q3) i.e 75th percentile of vector3 is **`r quantile(vector3, 0.75)`**
+
+**b) Matrix**
+
+<b>*eg 1:*</b>
+
+```{r}
+
+matrix1<-matrix(1:20,5,4)
+matrix1
+summary(matrix1)
+```
+
+Here we have created a matrix named "matrix1" with elements from 1 to 20. By default the matrix is formed with column dominance; And No of columns of matrix1 is **`r ncol(matrix1)`**\
+No of rows of matrix1 is **`r nrow(matrix1)`**\
+Other than that here all other statistic is calculated for each column Notice that name of each column is V1, V2, ... this is default.\
+
+Taking an example like for V3:-\
+Min of V3 is **`min(matrix1[, 3])`**\
+Max of V3 is **`r max(matrix1[, 3])`**\
+Mean of V3 is **`r mean(matrix1[, 3])`**\
+Median of V3 is **`r median(matrix1[, 3])`**\
+First quartile (Q1) i.e 25th percentile of V3 is **`r quantile(matrix1[, 3])`**\
+Third quartile (Q3) i.e 75th percentile of V3 is **`r quantile(matrix1[, 3])`**
+
+<b>*eg 2:*</b>
+
+```{r}
+matrix2<-matrix(1:20,5,4,byrow= TRUE)
+matrix2
+summary(matrix2)
+
+colnames(matrix2) <- c("alpha", "beta", "gamma", "sigma")
+matrix2
+
+```
+
+Here we have created a matrix named "matrix2" with elements from 1 to 20. Now to change the default setting we have used an argument "byrow" ; And
+
+No of columns of matrix2 is **`r ncol(matrix2)`**\
+No of rows of matrix2 is **`r nrow(matrix2)`**\
+Also i have named the columns instead of default V1, V2...
+
+**c) Data Frame**
+
+```{r,echo=FALSE}
+
+
+dtfrm1 <- data.frame(
+  S_no = c(
+    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19),
+  Order_ID = c(
+    "402-5239558-4281957",
+    "403-4106553-1691525",
+    "407-3483041-9133135",
+    "406-7195963-2374765",
+    "404-4712917-7300332",
+    "408-9885439-6698733",
+    "408-3363121-6123562",
+    "405-6877720-7865168",
+    "408-9361250-7029128",
+    "402-9141667-1791537",
+    "403-0343365-3075550",
+    "171-9419863-7830701",
+    "405-5657207-4685151",
+    "402-0603541-4663511",
+    "406-0207843-8044301",
+    "403-8890969-8669100",
+    "405-6605216-7124309",
+    "403-2726196-9752350",
+    "406-3360895-1639546"
+  ),
+  Date = c(
+    "04-05-22",
+    "04-23-22",
+    "04-16-22",
+    "05-02-22",
+    "06-06-22",
+    "04-13-22",
+    "04-06-22",
+    "05-07-22",
+    "05-19-22",
+    "05-10-22",
+    "06-06-22",
+    "05-27-22",
+    "05-26-22",
+    "05-16-22",
+    "05-15-22",
+    "06-11-22",
+    "06-11-22",
+    "06-02-22",
+    "05-08-22"
+  ),
+  Age = c(44,29,67,20,62,49,23,70,75,43,76,45,18,44,52,18,30,48,24),
+  Gender = c(
+  "Women",
+  "Women",
+  "Women",
+  "Women",
+  "Women",
+  "Men",
+  "Women",
+  "Women",
+  "Women",
+  "Women",
+  "Women",
+  "Women",
+  "Women",
+  "Men",
+  "Women",
+  "Women",
+  "Men",
+  "Women",
+  "Men"
+  ),
+  
+  Status = c(
+    "Shipped",
+    "Cancelled",
+    "Cancelled",
+    "Shipped",
+    "Shipped",
+    "Pending",
+    "Shipped",
+    "Shipped",
+    "Pending",
+    "Cancelled",
+    "Shipped",
+    "Shipped",
+    "Pending",
+    "Shipped",
+    "Pending",
+    "Shipped",
+    "Shipped",
+    "Shipped",
+    "Shipped"
+  ),
+  Category = c(
+    "Set",
+    "Top",
+    "Bottom",
+    "Set",
+    "Saree",
+    "Set",
+    "Western Dress",
+    "Kurta",
+    "Set",
+    "Saree",
+    "Set",
+    "Western Dress",
+    "Set",
+    "Kurta",
+    "Set",
+    "Kurta",
+    "Set",
+    "Bottom",
+    "Saree"
+  ),
+  Qty = c(8, 6, 3, 5, 2, 3, 8, 1, 3, 4, 9, 1, 2, 1, 2, 1, 1, 1, 3),
+  currency = c(
+  "INR",
+  "INR",
+  "INR",
+  "USD",
+  "USD",
+  "INR",
+  "INR",
+  "USD",
+  "INR",
+  "INR",
+  "USD",
+  "USD",
+  "INR",
+  "INR",
+  "USD",
+  "INR",
+  "INR",
+  "INR",
+  "USD"
+  ),
+  Amount = c(5584, 2295, 4235, 3036, 2894, 2864, 2860, 2796, 2698, 2795, 2664, 2655, 2598, 2598, 2598, 2598, 2598, 2463, 2456),
+  Size = c("XS", "3XL", "M", "M", "3XL", "S", "XS", "M", "L", "XXL", "XXL", "XXL", "L", "XL", "L", "XL", "XL", "S", "XS"),
+  shipstate = c(
+    "ANDHRA PRADESH",
+    "PUNJAB",
+    "RAJASTHAN",
+    "UTTAR PRADESH",
+    "MAHARASHTRA",
+    "KARNATAKA",
+    "UTTAR PRADESH",
+    "HARYANA",
+    "WEST BENGAL",
+    "TAMIL NADU",
+    "TELANGANA",
+    "MAHARASHTRA",
+    "MAHARASHTRA",
+    "MAHARASHTRA",
+    "RAJASTHAN",
+    "MAHARASHTRA",
+    "TELANGANA",
+    "MAHARASHTRA",
+    "MAHARASHTRA"
+  ),
+  ship_service_level = c(
+  "Expedited",
+  "Standard",
+  "Standard",
+  "Expedited",
+  "Expedited",
+  "Expedited",
+  "Standard",
+  "Standard",
+  "Expedited",
+  "Expedited",
+  "Expedited",
+  "Expedited",
+  "Standard",
+  "Standard",
+  "Standard",
+  "Expedited",
+  "Expedited",
+  "Standard",
+  "Standard"
+  ),
+  ship_postal_code = c(
+    522007,
+    144022,
+    302012,
+    226002,
+    400081,
+    560032,
+    208001,
+    123029,
+    700016,
+    600053,
+    500009,
+    410206,
+    400607,
+    440010,
+    331403,
+    400701,
+    500050,
+    445203,
+    411028
+  )
+  
+)
+```
+
+```{r}
+head(dtfrm1)
+
+summary(dtfrm1)
+
+
+```
+
+Now here i have created a data frame of random amazon sales data with S.no, order_ID, Date, Age, Gender, Status, Category, Qty, currency, Amount, Size, shipstate, ship_service_level and ship_postal_code as its header.
+
+Here apart from numerical data I also have categorical data for eg:\
+gender and currency is a type of a [^1]**categorical data;** whereas qty and and age is a [^2]**numerical type** of data.\
+And in summary it has given us different values of statistics similar to a matrix and a vector.\
+
+[^1]: Categorical data refers to data that can be divided into groups or categories, typically representing qualitative characteristics or attributes. Examples include gender, color, and type of car.
+
+[^2]: Numerical data, on the other hand, consists of numbers and can be measured or quantified. It represents quantities or values that can be counted or measured, such as height, weight, temperature, and age.
+
+<b>[Q2 : Explain process of importing data from Windows (CSV file, Excel file) and packages. Interpret imported data with a summary. Plot histogram, box plot, frequency density.]{style="font-family: Ariel;"}</b>
+
+```{r,echo=FALSE}
+getwd()
+
+```
+
+# The process of importing data from csv/excel file is as follows:
+
+1.  Download any dataset online or made up in csv/excel format and save it in your directory. In this case i have a csv/excel file named wage1/Amazon_sale_report stored in my [^3]**directory** i.e a folder in desktop named "coding_or_programming"
+
+2.  Then simply using the inbuilt command i.e read.csv()/read_excel() (now here's the catch we cant use read.excel in markdown for this purpose we have read_excel now in order to use it, you need to download the package named '**readx1'**) with name of the file you want to import in "" (within brackets).
+
+3.  If for example your file is not saved in the directory but somewhere else then simply enter the full path of the document rather then only its name.\
+
+      <b>*a) csv file*</b>
+
+[^3]: In R, a directory is essentially a folder in your computer's file system. These are fundamental for organizing and accessing files and data within R.
+
+```{r,echo=FALSE,message=FALSE, warning=FALSE, error=FALSE}
+
+library(MASS)
+```
+
+```{r,message=FALSE, warning=FALSE, eval = FALSE, error=FALSE}
+ds1<-read.csv("C:/Users/Hamada Salim G Trd/Desktop/coding_Or_progrmming/Amazon2.csv")
+```
+
+```{r}
+head(ds1)
+summary(ds1)
+
+data(ds1, package = "MASS")
+boxplot(Amount~ship.state, data = ds1, main= "Expenditure per State",
+        xlab = "Ship State", ylab = "Amount (in RS)", col="brown")
+
+
+hist(ds1$Amount, main = "Amount of Purchase", xlab = "Amount", col = "lavender", border = "red")
+
+```
+
+\
+<b>*b) excel file*</b>
+
+```{r,echo=FALSE,message=FALSE, warning=FALSE, error=FALSE}
+library(readxl)
+library(ggplot2)
+```
+
+```{r,message=FALSE, warning=FALSE, error=FALSE}
+ds2<-read_excel("C:/Users/Hamada Salim G Trd/Desktop/coding_Or_progrmming/Amazon1.xlsx")
+head(ds2)
+summary(ds2)
+
+ggplot(data = ds2, aes(x = Amount)) +
+  geom_histogram(aes(y = ..density..), bins = 30, color = "yellow", fill = "brown", add= "mean") +
+  labs(title = "Frequency Density Plot",
+       x = "Amount",
+       y = "Density")
+
+
+my_colors <- c("maroon", "violet", "green", "darkblue", "black")
+ggplot(data = ds2, aes(y = Amount, x = Category, fill = Category)) +
+  geom_boxplot() +
+  labs(title = "Most Spent Clothing", y = "Amount", x = "Type of Clothing") +
+  scale_fill_manual(values = my_colors) 
+  
+
+
+```
+
+# Linear Regression
+
+<b>[Q3 :Take other imported data and do correlation with interpretation, simple linear regression with interpretation (Check and interpret: Intercept and Slope, variance of parameter and error term, t-test, p-value, Adj R square, F test). Plot regression model on the graph.]{style="font-family: Ariel;"}</b>
+
+```{r}
+
+ds3<-read.csv("C:/Users/Hamada Salim G Trd/Desktop/coding_Or_progrmming/HTV.csv")
+head(ds3)
+```
+
+So here first i have imported a file named "HTV.csv" from my directory. This data consists of **1230** observations with **23** variables.
+
+```{r}
+sm<-lm(wage ~ educ, data = ds3)
+sm
+summary(sm)
+```
+
+```{r,echo=FALSE,message=FALSE, warning=FALSE, error=FALSE}
+library(lmtest)
+```
+
+```{r}
+pv1<-vcov(sm)
+pv1
+variances1 <- diag(pv1)
+variances1
+
+anova(sm)
+
+resid1<-resid(sm)
+var(resid1)
+plot(density(resid(sm)))
+
+
+```
+
+**Process:**
+
+-   Now i have first formed a linear regression model named "sm" with Y = B~1~ + B~2~*X~2~ + u as the **PRF** and Y hat = b~1~ + b~2~*X~2~ + e is the **SRF** where Y is the wage and X is the education.
+
+-   So the summary shows us that **b~1~ = -4.857** and **b~2~ = 1.392** the 3 stars (\*\*\*) in the intercept and educ shows that both are significant we also have residual standard error i.e sigma hat which is **`r sigma(sm)`** also called as *standard error of regression (*[^4]**SER**). also notice that degree of freedom is given 1228 i.e (n-2) in this case as only two unknown parameters are there which is consistent with what we studied in theory.
+
+-   *r^2^* value is **0.1302** i.e only 13.02% which means only this percentage of variation in Y was explained by the model also known as [^5]**goodness of fit.**
+
+-   vcov() function is used to extract the variance-covariance matrix in which the diagonal elements of this matrix represent the variances of the parameter estimates. Similary, we find the variance of residuals.
+
+-   The density plot of residuals shows us that they are normally distributed.
+
+-   There is the [^6]**adjusted R**^*2*^ *value* which is **`r summary(sm)$adj.r.squared`** it can be -ve or +ve in this case it is +ve, it doesn't have much significance in linear model but more in multiple model so we'll talk about it then.
+
+-   Along with this we have F stat value so now we can check the property t^2^ ~k~ = F~1, k~ where k is the no of parameters (i.e 2); Taking level of significance as (5%) alpha = 0.05
+
+    So, t^2^ ~0.025, 2~ = F ~1, 2, 0.05~ = **approx 18.513**
+
+[^4]: *SER represents the standard deviation of the errors/residuals in a regression model. It measures the accuracy of the regression predictions.*
+
+[^5]: r^2^ is a statistical measure used in regression analysis to assess the goodness of fit of a regression model. It represents the proportion of the variance in the dependent variable that is predictable from the independent variables.
+
+[^6]: is a modification of the standard r^2^ value that adjusts for the number of predictors in a regression model. While r^2^ tends to increase as more predictors are added to the model, even if those predictors are not relevant, Adjusted R^2^ penalizes the addition of unnecessary variables.
+
+**Now representing the model graphically :**
+
+```{r,echo=FALSE,message=FALSE, warning=FALSE, error=FALSE}
+library(tidyverse)
+library(stargazer)
+library(magrittr)
+```
+
+```{r}
+
+plot(ds3$educ,ds3$wage,ylab = "Wages",xlab = "Education",
+     main = "Impact Of Education On Wages", col = "royalblue")
+abline(sm, col = "red")
+
+cor(ds3$wage,ds3$educ)
+
+ds3 %<>% mutate(wage_hat_1=fitted(sm))
+
+ggplot(data = ds3,mapping = aes(x=educ))+
+  geom_point(mapping = aes(y=wage, col='Actual wages'))+
+  geom_point(mapping = aes(y=wage_hat_1, col='Predicted wages'))+
+  labs(title = "Y vs Y hat",
+       x = "Education",
+       y = "Wages")+
+  geom_abline(intercept = 0,slope = 1)
+
+
+```
+
+-   First I have created a simple scatter plot where the *regression line slopes* upward, it suggests a positive relationship between education and wages, indicating that individuals with higher levels of education tend to earn higher wages.
+
+-   Also if you look at the predicted values how they are so close to the regression line which shows us that the good fit of the model.
+
+The *correlation* of wage and education also came out to be positive i.e **`r cor(ds3$wage,ds3$educ)`** which means that as one variable (education) increases, the other variable (wages) tends to increase as well, but the relationship is not that strong.
+
+# Multiple Regression
+
+<b>[Q4 :Do multiple regression model and compare with a simple Linear regression model (basis of comparison: Intercept and Slope, variance of parameter and error term, t-test, R Square, Adj R square, F test).Plot regression model on the graph.]{style="font-family: Ariel;"}</b>
+
+```{r}
+
+mm<-lm(wage ~ educ + exper, data = ds3)
+mm
+summary(mm)
+```
+
+```{r}
+
+pv2<-vcov(mm)
+pv2
+variances2 <- diag(pv2)
+variances2
+
+anova(mm)
+
+resid2<-resid(mm)
+var(resid2)
+
+plot(density(resid(mm)))
+
+
+```
+
+**Process :**
+
+-   Now here i have formed a multiple linear regression model named "mm" with Y = B~1~ + B~2~*X~2~ + B~3~*X~3~ + u as the **PRF** and Y hat = b~1~ + b~2~*X~2~ + b~3~*X~3~ + e is the **SRF** where Y is the wage, X1 is the education and X2 is experience.
+
+-   The summary shows us that **b~1~ = -18.7048**, **b~2~ = 1.9478** and **b~3~ = 0.6143** the 3 stars (\*\*\*) in the intercept, educ and exper shows that all are significant we also have residual standard error i.e sigma hat which is **`r sigma(mm)`** also called as standard error of regression (SER). also notice that degree of freedom is given 1227 i.e (n-3) in this case as now we have three unknown parameters which is again consistent with what we studied in theory.
+
+-   R^2^ value is **0.1537** i.e only 15.37% which means only this percentage of variation in Y was explained by the model also known as goodness of fit.
+
+-   Here the adjusted R^2^ value which is **`r summary(mm)$adj.r.squared`** it can be -ve or +ve in this case it is +ve.
+
+**Now representing the model graphically :**
+
+```{r,echo=FALSE,message=FALSE, warning=FALSE, error=FALSE}
+library(stargazer)
+library(magrittr)
+library(tidyverse)
+```
+
+```{r}
+
+ds3 %<>% mutate(wage_hat_2=fitted(mm))
+ds3 %<>% mutate(resid2=residuals(mm))
+
+ggplot(data = ds3, mapping = aes(x=wage_hat_2))+
+  geom_point(mapping = aes(y=resid2, col = 'residual values' ))+
+  labs(x = "Fitted Values", y = "Residuals",
+       title = "Residuals vs Fitted Values Plot")+
+  geom_hline(yintercept = 0, color = "red")
+
+
+```
+
+-   We can see here that there are some points that deviate substantially from the horizontal line at y = 0 which represents *outliers* or influential observations.
+
+-   Also *Cluster of points* may suggest that there are subgroups or patterns in the data that are not captured by the model, these clusters could also indicate that there are additional variables or nonlinear relationships that should be included in the model to better explain the variability in the response variable. Alternatively, the clusters may arise due to inherent variability in the data that cannot be explained by the predictors included in the model.
+
+```{r,message=FALSE, warning=FALSE, error=FALSE}
+
+cor(ds3$wage,ds3$educ)
+cor(ds3$wage,ds3$exper)
+
+plot1 <- ggplot(ds3, aes(x = educ, y = wage)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Wage vs. Education",
+       x = "Education",
+       y = "Wage")
+
+ 
+plot2 <- ggplot(ds3, aes(x = exper, y = wage)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Wage vs. Experience",
+       x = "Experience",
+       y = "Wage")
+
+plot1
+plot2
+
+```
+
+Now here I have calculated the correlation of each explanatory variables with the dependent variable which is **`r cor(ds3$wage,ds3$educ)`** and **`r cor(ds3$wage,ds3$exper)`** for education and experience respectively. We see there is a -ve relationship between wage and exper whereas a +ve relationship between wage and educ, though in both the cases there is a *moderate correlation.* Also very evident from the corresponding graphs.
+
+**Now if we compare it with linear regression:**
+
++---------------------------+--------+---------------+-------------+------------------+------------------+------------------+-----------------+-------------------+
+|                           | R^2^   | Adjusted R^2^ | SER         | Var of residuals | Var of Intercept | Var of Slopes    | Correlation     | F Statistic Value |
+|                           |        |               |             |                  |                  |                  |                 |                   |
+|                           |        |               | (sigma hat) | (sigma^2^ hat)   |                  |                  |                 |                   |
++===========================+========+===============+:============+==================+==================+==================+=================+===================+
+| **Linear Model**          | 0.1302 | 0.1295        | 8.474       | 71.74432         | 1.8499           | educ = 0.01054   | educ = 0.3608   | 183.8             |
++---------------------------+--------+---------------+-------------+------------------+------------------+------------------+-----------------+-------------------+
+| **Multiple Linear Model** | 0.1537 | 0.1523        | 8.362       | 69.8024          | 7.4187           | educ = 0.01932   | educ = 0.3608   | 111.4             |
+|                           |        |               |             |                  |                  |                  |                 |                   |
+|                           |        |               |             |                  |                  | exper = 0.011054 | exper = -0.1352 |                   |
++---------------------------+--------+---------------+-------------+------------------+------------------+------------------+-----------------+-------------------+
+
+**We can see few interesting things:**
+
+1.  In multiple regression both R^2^ and adjusted R^2^ is greater than in the former model which means that the latter model explains or fits the data better.
+
+2.  Also the fact that we have increased the explanatory variables gives us the necessary penalty.
+
+3.  And then we have variance whose literal meaning is the spread of data points so here more the variance, more will be the spread.
